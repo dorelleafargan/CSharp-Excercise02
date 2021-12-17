@@ -1,0 +1,6 @@
+﻿To do list:
+1. Game Screen Update after user input.
+2. Check if win or lose.
+3. Fix code prints.
+4. After game finished, to start over?
+5. Overhaul the code before handing the assignment.
