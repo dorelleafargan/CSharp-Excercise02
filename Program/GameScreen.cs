@@ -40,30 +40,35 @@ namespace A22_Ex02
             StringBuilder gameBoardBuilder = new StringBuilder(string.Empty);
             List<string> playerGuesses = Player.GetPlayerGuessesStringArray();
             List<string> playerHits = Player.GetPlayerHitsStringArray();
-
-            for (int i = 0; i < Player.GetNumberOfTries(); i++)
-            {
-                Console.WriteLine("Current Board Status:\n");
-
-                gameBoardBuilder.Append("|Pins:    |Result:|");
-                gameBoardBuilder.Append(Environment.NewLine);
-                gameBoardBuilder.Append("|=========|=======|");
-                gameBoardBuilder.Append(Environment.NewLine);
-                gameBoardBuilder.Append("| # # # # |       |");
-                gameBoardBuilder.Append(Environment.NewLine);
-                
-                gameBoardBuilder.Append("|=========|=======|");
-                gameBoardBuilder.Append(Environment.NewLine);
-                gameBoardBuilder.Append("|" + playerGuesses[i] + "|" + playerHits[i] + "|");
-                gameBoardBuilder.Append(Environment.NewLine);
-            }
-
+            int guessNumber = Player.GetPlayerHitsStringArray().Count;
+            int numberOfTries = Player.GetNumberOfTries();
+            Console.WriteLine("Current Board Status:\n");
+            gameBoardBuilder.Append("|Pins:    |Result:|");
+            gameBoardBuilder.Append(Environment.NewLine);
             gameBoardBuilder.Append("|=========|=======|");
             gameBoardBuilder.Append(Environment.NewLine);
+            gameBoardBuilder.Append("| # # # # |       |");
+            gameBoardBuilder.Append(Environment.NewLine);
+            gameBoardBuilder.Append("|=========|=======|");
+            for (int i = 0; i < guessNumber; i++)
+            {
+                gameBoardBuilder.Append(Environment.NewLine);
+                gameBoardBuilder.Append("| " + Player.GetPlayerGuessesStringArray()[i] + "|" + Player.GetPlayerHitsStringArray()[i] + "|");
+                gameBoardBuilder.Append(Environment.NewLine);
+                gameBoardBuilder.Append("|=========|=======|");
+            }
+
+            for (int i = 0; i < numberOfTries - guessNumber; i++)
+            {
+                gameBoardBuilder.Append(Environment.NewLine);
+                gameBoardBuilder.Append("|         |       |");
+                gameBoardBuilder.Append(Environment.NewLine);
+                gameBoardBuilder.Append("|=========|=======|");
+            }
+
+            gameBoardBuilder.Append(Environment.NewLine);
+
             Console.WriteLine(gameBoardBuilder);
-
-
-
         }
 
         public static void PlayerHitsSringBuilder()
@@ -85,7 +90,7 @@ namespace A22_Ex02
                 hitString.Append("  ");
             }
 
-            Player.SetPlayerHitsStringArray(hitString);
+            Player.SetPlayerHitsStringArray(hitString.Remove(hitString.Length-1, 1));
         }
         
         public static void PlayerGuessStringBuilder()

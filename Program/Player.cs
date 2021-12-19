@@ -63,7 +63,6 @@ namespace A22_Ex02
         public static void SetPlayerGuessesStringArray(StringBuilder i_PlayerGuessForPrint)
         {
             m_PlayerGuessStringArray.Add(i_PlayerGuessForPrint.ToString());
-            //Console.WriteLine(m_PlayerGuessStringArray[0]);
         }
 
         public static List<string> GetPlayerHitsStringArray()
@@ -74,7 +73,6 @@ namespace A22_Ex02
         public static void SetPlayerHitsStringArray(StringBuilder i_PlayerHitsForPrint)
         {
             m_PlayerHitsStringArray.Add(i_PlayerHitsForPrint.ToString());
-            //Console.WriteLine(m_PlayerHitsStringArray[0]);
         }
     }
 }

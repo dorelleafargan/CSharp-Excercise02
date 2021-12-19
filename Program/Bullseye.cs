@@ -16,9 +16,9 @@ namespace A22_Ex02
             for (int i = 0; i < Player.GetNumberOfTries(); i++)
             {
                 CheckGuess(randomLetters);
-                //GameScreen.drawAfterUserInput();
                 GameScreen.PlayerGuessStringBuilder();
                 GameScreen.PlayerHitsSringBuilder();
+                GameScreen.drawAfterUserInput();
             }
         }
 
@@ -115,7 +115,7 @@ namespace A22_Ex02
         {
             CharGuessToString();
             string playerGuess = Player.GetPlayerGuess();
-            int[] counterArray = new int[3];
+            int[] counterArray = new int[3];  // [V counter, X counter, NoHit]
             for (int i = 0; i < 4; i++)
             {
                 if (playerGuess.Contains(i_randomCharsArray[i]))
@@ -149,7 +149,7 @@ namespace A22_Ex02
 
         public static bool WinOrLose(List<string> i_HitList)
         {
-            return i_HitList.Contains("V V V V ");
+            return i_HitList.Contains("V V V V");
         }
     }
 

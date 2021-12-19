@@ -10,6 +10,7 @@ namespace A22_Ex02
     {
         public static void Main()
         {
+
             Bullseye Game = new Bullseye();
             Game.Run();
         }
