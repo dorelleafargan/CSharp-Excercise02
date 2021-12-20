@@ -7,3 +7,13 @@ C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Exc
 C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\obj\Debug\A22_Ex02.csproj.CopyComplete
 C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\obj\Debug\Program.exe
 C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\obj\Debug\Program.pdb
+C:\C#\Ex02\Program\bin\Debug\Program.exe.config
+C:\C#\Ex02\Program\bin\Debug\Program.exe
+C:\C#\Ex02\Program\bin\Debug\Program.pdb
+C:\C#\Ex02\Program\bin\Debug\Ex02.ConsoleUtils.dll
+C:\C#\Ex02\Program\obj\Debug\A22_Ex02.csproj.AssemblyReference.cache
+C:\C#\Ex02\Program\obj\Debug\A22_Ex02.csproj.SuggestedBindingRedirects.cache
+C:\C#\Ex02\Program\obj\Debug\A22_Ex02.csproj.CoreCompileInputs.cache
+C:\C#\Ex02\Program\obj\Debug\A22_Ex02.csproj.CopyComplete
+C:\C#\Ex02\Program\obj\Debug\Program.exe
+C:\C#\Ex02\Program\obj\Debug\Program.pdb

@@ -10,69 +10,71 @@ namespace A22_Ex02
     {
         private static int m_NumberOfTries = 0;
         private static string m_PlayerGuess;
-        private static string m_PlayerHits;
         private static int[] m_RandomCharsCounterArray;
         private static List<string> m_PlayerGuessStringArray = new List<string>();
         private static List<string> m_PlayerHitsStringArray = new List<string>();
 
-        public static int GetNumberOfTries()
+        public int NumberOfTries 
         {
-            return m_NumberOfTries;
+            get { return m_NumberOfTries; }
+            set { m_NumberOfTries = value; }
         }
 
-        public static void SetNumberOfTries(int i_NumberOfTries)
+        public string PlayerGuess
         {
-            m_NumberOfTries = i_NumberOfTries;
+            get { return m_PlayerGuess; }
+            set { m_PlayerGuess = value; }
         }
 
-        public static string GetPlayerGuess()
+        public int[] PlayerHitsCounter
         {
-            return m_PlayerGuess;
+            get { return m_RandomCharsCounterArray; }
+            set { m_RandomCharsCounterArray = value; }
         }
 
-        public static void SetPlayerGuess(StringBuilder i_PlayerGuess)
+        public List<string> PlayerGuessesList
         {
-            m_PlayerGuess = i_PlayerGuess.ToString();
+            get { return m_PlayerGuessStringArray; }
+            set { }
         }
 
-        public static string GetPlayerHits()
+        public List<string> PlayerHitsList
         {
-            return m_PlayerHits;
+            get { return m_PlayerHitsStringArray; }
+            set { }
         }
 
-        public static void SetPlayerHits(string i_PlayerHits)
+        public void PlayerHitsSringBuilder()
         {
-            m_PlayerHits = i_PlayerHits;
-        }
-            
-        public static int[] GetPlayerHitsCounterArray()
-        {
-            return m_RandomCharsCounterArray;
+            StringBuilder hitString = new StringBuilder();
+            int[] playerHitsArray = PlayerHitsCounter;
+            for (int i = 0; i < playerHitsArray[0]; i++)
+            {
+                hitString.Append("V ");
+            }
+
+            for (int j = 0; j < playerHitsArray[1]; j++)
+            {
+                hitString.Append("X ");
+            }
+
+            for (int k = 0; k < playerHitsArray[2]; k++)
+            {
+                hitString.Append("  ");
+            }
+
+            PlayerHitsList.Add(hitString.Remove(hitString.Length - 1, 1).ToString());
         }
 
-        public static void SetPlayerHitsCounterArray(int[] i_PlayerHitsCounterArray)
+        public void PlayerGuessStringBuilder()
         {
-            m_RandomCharsCounterArray = i_PlayerHitsCounterArray;
-        }
+            StringBuilder PlayerGuessString = new StringBuilder();
+            for (int i = 0; i < PlayerGuess.Length; i++)
+            {
+                PlayerGuessString.Append(PlayerGuess[i] + " ");
+            }
 
-        public static List<string> GetPlayerGuessesStringArray()
-        {
-            return m_PlayerGuessStringArray;
-        }
-
-        public static void SetPlayerGuessesStringArray(StringBuilder i_PlayerGuessForPrint)
-        {
-            m_PlayerGuessStringArray.Add(i_PlayerGuessForPrint.ToString());
-        }
-
-        public static List<string> GetPlayerHitsStringArray()
-        {
-            return m_PlayerHitsStringArray;
-        }
-
-        public static void SetPlayerHitsStringArray(StringBuilder i_PlayerHitsForPrint)
-        {
-            m_PlayerHitsStringArray.Add(i_PlayerHitsForPrint.ToString());
+            PlayerGuessesList.Add(PlayerGuessString.ToString());
         }
     }
 }

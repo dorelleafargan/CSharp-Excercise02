@@ -8,21 +8,24 @@ namespace A22_Ex02
 {
     public class Bullseye
     {
+        internal Player m_Player = new Player();
+        private GameScreen m_Screen = new GameScreen();
 
         public void Run()
         {
-            GameScreen.IntilizeScreen();
+            GetNumberOfTries();
+            m_Screen.IntilizeScreen();
             char[] randomLetters = GenerateRandomLetters();
-            for (int i = 0; i < Player.GetNumberOfTries(); i++)
+            for (int i = 0; i < m_Player.NumberOfTries; i++)
             {
                 CheckGuess(randomLetters);
-                GameScreen.PlayerGuessStringBuilder();
-                GameScreen.PlayerHitsSringBuilder();
-                GameScreen.drawAfterUserInput();
+                m_Player.PlayerGuessStringBuilder();
+                m_Player.PlayerHitsSringBuilder();
+                m_Screen.drawAfterUserInput();
             }
         }
 
-        internal static void GetNumberOfTries()
+        internal void GetNumberOfTries()
         {
             Console.WriteLine("Enter a number of tries you want to play: (A number between 4-10)");
             int numberOfTries = 0;
@@ -33,27 +36,27 @@ namespace A22_Ex02
                 IsANumber(ref numberOfTries, int.TryParse(Console.ReadLine(), out numberOfTries));
             }
 
-            Player.SetNumberOfTries(numberOfTries);
+            m_Player.NumberOfTries = numberOfTries;
         }
 
         public static char GuessInput()
         {
             char guess = '0';
-            bool isOnlyOneChar = char.TryParse(Console.ReadLine(), out guess);
+            bool isOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out guess);
             CheckIfStringOrChar(isOnlyOneChar, ref guess);
             CheckIfUserWantsToCloseProgram(guess);
 
             while (guess < 'A' || guess > 'Z')
             {
                 Console.WriteLine("Wrong input, you should input a character from the ABC.");
-                isOnlyOneChar = char.TryParse(Console.ReadLine(), out guess);
+                isOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out guess);
                 CheckIfStringOrChar(isOnlyOneChar, ref guess);
                 CheckIfUserWantsToCloseProgram(guess);
             }
             while (guess < 'A' || guess > 'H')
             {
                 Console.WriteLine("Wrong Input, You should input only the first 8 characters in ABC.");
-                isOnlyOneChar = char.TryParse(Console.ReadLine(), out guess);
+                isOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out guess);
                 CheckIfStringOrChar(isOnlyOneChar, ref guess);
                 CheckIfUserWantsToCloseProgram(guess);
             }
@@ -61,12 +64,12 @@ namespace A22_Ex02
             return guess;
         }
 
-        private static void CheckIfStringOrChar(bool i_IsOnlyOneChar, ref char i_CheckChar)
+        internal static void CheckIfStringOrChar(bool i_IsOnlyOneChar, ref char i_CheckChar)
         {
             while (!i_IsOnlyOneChar)
             {
                 Console.WriteLine("Wrong Input, You should input only one character");
-                i_IsOnlyOneChar = char.TryParse(Console.ReadLine(), out i_CheckChar);
+                i_IsOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out i_CheckChar);
             }
         }
 
@@ -99,7 +102,7 @@ namespace A22_Ex02
             return randomCharsArray;
         }
 
-        public static void CharGuessToString()
+        public void CharGuessToString()
         {
             Console.WriteLine("Please type your next guess: (A B C D) or 'Q' to quit");
             StringBuilder playerGuessCharToString = new StringBuilder();
@@ -108,13 +111,13 @@ namespace A22_Ex02
                 playerGuessCharToString.Append(GuessInput());
             }
 
-            Player.SetPlayerGuess(playerGuessCharToString);
+            m_Player.PlayerGuess = playerGuessCharToString.ToString();
         }
 
-        public static void CheckGuess(char[] i_randomCharsArray)
+        public void CheckGuess(char[] i_randomCharsArray)
         {
             CharGuessToString();
-            string playerGuess = Player.GetPlayerGuess();
+            string playerGuess = m_Player.PlayerGuess;
             int[] counterArray = new int[3];  // [V counter, X counter, NoHit]
             for (int i = 0; i < 4; i++)
             {
@@ -135,7 +138,7 @@ namespace A22_Ex02
                 }
             }
 
-            Player.SetPlayerHitsCounterArray(counterArray);
+            m_Player.PlayerHitsCounter = counterArray;
         }
 
         public static void IsANumber(ref int io_NumberOfTries, bool io_IsANumber)
@@ -147,9 +150,9 @@ namespace A22_Ex02
             }
         }
 
-        public static bool WinOrLose(List<string> i_HitList)
+        public static bool WinOrLose(string i_Hit)
         {
-            return i_HitList.Contains("V V V V");
+            return i_Hit.Contains("V V V V");
         }
     }
 
