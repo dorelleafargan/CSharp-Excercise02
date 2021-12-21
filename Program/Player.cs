@@ -10,10 +10,10 @@ namespace A22_Ex02
     {
         private static int m_NumberOfTries = 0;
         private static string m_PlayerGuess;
-        private static int[] m_RandomCharsCounterArray;
+        private static int[] m_RandomCharsHitsCounterArray;
         private static List<string> m_PlayerGuessStringList = new List<string>();
         private static List<string> m_PlayerHitsStringList = new List<string>();
-        
+  
         public static int NumberOfTries 
         {
             get { return m_NumberOfTries; }
@@ -28,8 +28,8 @@ namespace A22_Ex02
 
         public static int[] PlayerHitsCounter
         {
-            get { return m_RandomCharsCounterArray; }
-            set { m_RandomCharsCounterArray = value; }
+            get { return m_RandomCharsHitsCounterArray; }
+            set { m_RandomCharsHitsCounterArray = value; }
         }
 
         public static List<string> PlayerGuessesList
@@ -66,15 +66,9 @@ namespace A22_Ex02
             PlayerHitsList.Add(hitString.Remove(hitString.Length - 1, 1).ToString());
         }
 
-        internal static void PlayerGuessStringBuilder()
+        internal static void PlayerGuessStringList()
         {
-            StringBuilder PlayerGuessString = new StringBuilder();
-            for (int i = 0; i < PlayerGuess.Length; i++)
-            {
-                PlayerGuessString.Append(PlayerGuess[i] + " ");
-            }
-
-            PlayerGuessesList.Add(PlayerGuessString.ToString());
+            PlayerGuessesList.Add(PlayerGuess + " ");
         }
 
         public static void PlayerListsReset()

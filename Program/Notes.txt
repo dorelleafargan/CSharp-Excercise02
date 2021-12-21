@@ -1,3 +1,2 @@
 ﻿To do list:
-1. Fix code prints.
-2. Overhaul the code before handing the assignment.
+1. Overhaul the code before handing the assignment.
