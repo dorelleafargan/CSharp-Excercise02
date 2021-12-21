@@ -11,40 +11,40 @@ namespace A22_Ex02
         private static int m_NumberOfTries = 0;
         private static string m_PlayerGuess;
         private static int[] m_RandomCharsCounterArray;
-        private static List<string> m_PlayerGuessStringArray = new List<string>();
-        private static List<string> m_PlayerHitsStringArray = new List<string>();
-
-        public int NumberOfTries 
+        private static List<string> m_PlayerGuessStringList = new List<string>();
+        private static List<string> m_PlayerHitsStringList = new List<string>();
+        
+        public static int NumberOfTries 
         {
             get { return m_NumberOfTries; }
             set { m_NumberOfTries = value; }
         }
 
-        public string PlayerGuess
+        public static string PlayerGuess
         {
             get { return m_PlayerGuess; }
             set { m_PlayerGuess = value; }
         }
 
-        public int[] PlayerHitsCounter
+        public static int[] PlayerHitsCounter
         {
             get { return m_RandomCharsCounterArray; }
             set { m_RandomCharsCounterArray = value; }
         }
 
-        public List<string> PlayerGuessesList
+        public static List<string> PlayerGuessesList
         {
-            get { return m_PlayerGuessStringArray; }
+            get { return m_PlayerGuessStringList; }
             set { }
         }
 
-        public List<string> PlayerHitsList
+        public static List<string> PlayerHitsList
         {
-            get { return m_PlayerHitsStringArray; }
+            get { return m_PlayerHitsStringList; }
             set { }
         }
 
-        public void PlayerHitsSringBuilder()
+        internal static void PlayerHitsSringBuilder()
         {
             StringBuilder hitString = new StringBuilder();
             int[] playerHitsArray = PlayerHitsCounter;
@@ -66,7 +66,7 @@ namespace A22_Ex02
             PlayerHitsList.Add(hitString.Remove(hitString.Length - 1, 1).ToString());
         }
 
-        public void PlayerGuessStringBuilder()
+        internal static void PlayerGuessStringBuilder()
         {
             StringBuilder PlayerGuessString = new StringBuilder();
             for (int i = 0; i < PlayerGuess.Length; i++)
@@ -75,6 +75,12 @@ namespace A22_Ex02
             }
 
             PlayerGuessesList.Add(PlayerGuessString.ToString());
+        }
+
+        public static void PlayerListsReset()
+        {
+            m_PlayerHitsStringList.Clear();
+            m_PlayerGuessStringList.Clear();
         }
     }
 }

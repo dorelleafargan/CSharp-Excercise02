@@ -8,24 +8,24 @@ namespace A22_Ex02
 {
     public class Bullseye
     {
-        internal Player m_Player = new Player();
-        private GameScreen m_Screen = new GameScreen();
+        //internal Player m_Player = new Player();
+        //private GameScreen m_Screen = new GameScreen();
 
         public void Run()
         {
             GetNumberOfTries();
-            m_Screen.IntilizeScreen();
+            GameScreen.IntilizeScreen();
             char[] randomLetters = GenerateRandomLetters();
-            for (int i = 0; i < m_Player.NumberOfTries; i++)
+            for (int i = 0; i < Player.NumberOfTries; i++)
             {
                 CheckGuess(randomLetters);
-                m_Player.PlayerGuessStringBuilder();
-                m_Player.PlayerHitsSringBuilder();
-                m_Screen.drawAfterUserInput();
+                Player.PlayerGuessStringBuilder();
+                Player.PlayerHitsSringBuilder();
+                GameScreen.drawAfterUserInput();
             }
         }
 
-        internal void GetNumberOfTries()
+        internal static void GetNumberOfTries()
         {
             Console.WriteLine("Enter a number of tries you want to play: (A number between 4-10)");
             int numberOfTries = 0;
@@ -36,7 +36,7 @@ namespace A22_Ex02
                 IsANumber(ref numberOfTries, int.TryParse(Console.ReadLine(), out numberOfTries));
             }
 
-            m_Player.NumberOfTries = numberOfTries;
+            Player.NumberOfTries = numberOfTries;
         }
 
         public static char GuessInput()
@@ -102,7 +102,7 @@ namespace A22_Ex02
             return randomCharsArray;
         }
 
-        public void CharGuessToString()
+        public static void CharGuessToString()
         {
             Console.WriteLine("Please type your next guess: (A B C D) or 'Q' to quit");
             StringBuilder playerGuessCharToString = new StringBuilder();
@@ -111,13 +111,13 @@ namespace A22_Ex02
                 playerGuessCharToString.Append(GuessInput());
             }
 
-            m_Player.PlayerGuess = playerGuessCharToString.ToString();
+            Player.PlayerGuess = playerGuessCharToString.ToString();
         }
 
         public void CheckGuess(char[] i_randomCharsArray)
         {
             CharGuessToString();
-            string playerGuess = m_Player.PlayerGuess;
+            string playerGuess = Player.PlayerGuess;
             int[] counterArray = new int[3];  // [V counter, X counter, NoHit]
             for (int i = 0; i < 4; i++)
             {
@@ -138,7 +138,7 @@ namespace A22_Ex02
                 }
             }
 
-            m_Player.PlayerHitsCounter = counterArray;
+            Player.PlayerHitsCounter = counterArray;
         }
 
         public static void IsANumber(ref int io_NumberOfTries, bool io_IsANumber)

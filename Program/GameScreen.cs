@@ -8,7 +8,7 @@ namespace A22_Ex02
 {
     public class GameScreen
     {
-        internal void IntilizeScreen()
+        internal static void IntilizeScreen()
         {
             Ex02.ConsoleUtils.Screen.Clear();
             StringBuilder gameBoardBuilder = new StringBuilder(string.Empty);
@@ -20,7 +20,7 @@ namespace A22_Ex02
             gameBoardBuilder.Append(Environment.NewLine);
             gameBoardBuilder.Append("| # # # # |       |");
             gameBoardBuilder.Append(Environment.NewLine);
-            for (int i = 0; i < Bullseye.m_Player.NumberOfTries; i++)
+            for (int i = 0; i < Player.NumberOfTries; i++)
             {
                 gameBoardBuilder.Append("|=========|=======|");
                 gameBoardBuilder.Append(Environment.NewLine);
@@ -33,7 +33,7 @@ namespace A22_Ex02
             Console.WriteLine(gameBoardBuilder);
         }
 
-        internal void drawAfterUserInput()
+        internal static void drawAfterUserInput()
         {
             Ex02.ConsoleUtils.Screen.Clear();
             StringBuilder gameBoardBuilder = new StringBuilder(string.Empty);
@@ -94,6 +94,7 @@ namespace A22_Ex02
                 else
                 {
                     Ex02.ConsoleUtils.Screen.Clear();
+                    Player.PlayerListsReset();
                     Program.Main();
                 }
             }
