@@ -6,47 +6,47 @@ using System.Threading.Tasks;
 
 namespace A22_Ex02
 {
-    public class Bullseye
+    internal class Bullseye
     {
-        private static char[] m_RandomCharsLetters = new char[4];
-        public void Run()
+        internal void Run()
         {
-            GetNumberOfTries();
+            numberOfTries();
             GameScreen.DrawOnScreen();
-            m_RandomCharsLetters = GenerateRandomLetters();
+            RandomLettersGenerator.GenerateRandomLetters();
+            char[] randomLetters = RandomLettersGenerator.RandomLetters;
             for (int i = 0; i < Player.NumberOfTries; i++)
             {
-                CheckGuess(m_RandomCharsLetters);
+                checkGuess(randomLetters);
                 Player.PlayerGuessStringList();
                 Player.PlayerHitsSringBuilder();
                 GameScreen.DrawOnScreen();
             }
         }
 
-        internal static void GetNumberOfTries()
+        private void numberOfTries()
         {
             Console.WriteLine("Enter a number of tries you want to play: (A number between 4-10)");
             int numberOfTries = 0;
-            IsANumber(ref numberOfTries, int.TryParse(Console.ReadLine(), out numberOfTries));
+            this.isANumber(ref numberOfTries, int.TryParse(Console.ReadLine(), out numberOfTries));
             while (numberOfTries < 4 || numberOfTries > 10)
             {
                 Console.WriteLine("\nWrong input, you should input a number between 4-10.\n");
-                IsANumber(ref numberOfTries, int.TryParse(Console.ReadLine(), out numberOfTries));
+                this.isANumber(ref numberOfTries, int.TryParse(Console.ReadLine(), out numberOfTries));
             }
 
             Player.NumberOfTries = numberOfTries;
         }
 
-        public static void GuessInput()
+        private void guessInput()
         {
-            string guess = String.Empty;
+            string guess = string.Empty;
             bool isNotCorrectInput = false;
             Console.WriteLine("Please type your next guess: (A B C D) or 'Q' to quit");
             do
             {
                 isNotCorrectInput = false;
                 guess = Console.ReadLine().ToUpper();
-                CheckIfUserWantsToCloseProgram(guess[0]);
+                this.checkIfUserWantsToCloseProgram(guess[0]);
                 if (guess.Length != 7)
                 {
                     Console.WriteLine("\nWrong input, you should input letters in the following format:\nX X X X");
@@ -59,13 +59,13 @@ namespace A22_Ex02
                     isNotCorrectInput = true;
                 }
 
-                if ((isNotCorrectInput == false) && !((char.IsLetter(guess[0]) && char.IsLetter(guess[2]) && char.IsLetter(guess[4]) && char.IsLetter(guess[6]))))
+                if ((isNotCorrectInput == false) && !(char.IsLetter(guess[0]) && char.IsLetter(guess[2]) && char.IsLetter(guess[4]) && char.IsLetter(guess[6])))
                 {
                     Console.WriteLine("Wrong input, you should input a character from the ABC.\n");
                     isNotCorrectInput = true;
                 }
 
-                if ((isNotCorrectInput == false) && !(CheckLettersInCorrectRange(guess)))
+                if ((isNotCorrectInput == false) && !this.checkLettersInCorrectRange(guess))
                 {
                     Console.WriteLine("Wrong Input, You should input only the first 8 characters in ABC.\n");
                     isNotCorrectInput = true;
@@ -76,7 +76,7 @@ namespace A22_Ex02
             Player.PlayerGuess = guess;
         }
 
-        private static bool CheckLettersInCorrectRange(string i_LetterString)
+        private bool checkLettersInCorrectRange(string i_LetterString)
         {
             bool isCorrectLetter = true;
             foreach (char letter in i_LetterString)
@@ -91,68 +91,38 @@ namespace A22_Ex02
                     break;
                 }
             }
+
             return isCorrectLetter;
         }
 
-        internal static void CheckIfStringOrChar(bool i_IsOnlyOneChar, ref char i_CheckChar)
+        private static void checkIfStringOrChar(bool i_IsOnlyOneChar, ref char io_CheckChar)
         {
             while (!i_IsOnlyOneChar)
             {
                 Console.WriteLine("\nWrong Input, You should input only one character\n");
-                i_IsOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out i_CheckChar);
+                i_IsOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out io_CheckChar);
             }
         }
 
-        private static void CheckIfUserWantsToCloseProgram(char i_Guess)
+        private void checkIfUserWantsToCloseProgram(char i_UserInput)
         {
-            if (i_Guess == 'q' || i_Guess == 'Q')
+            if (i_UserInput == 'Q')
             {
                 Console.WriteLine("\nThanks for playing. Goodbye.\n");
                 Environment.Exit(0);
             }
         }
 
-        private static char[] GenerateRandomLetters()
+        private void checkGuess(char[] i_RandomCharsArray)
         {
-            Random random = new Random();
-            char randomChar = (char)random.Next(65, 72);
-            char[] randomCharsArray = new char[4];
-            randomCharsArray[0] = randomChar;
-            for (int i = 1; i < 4; i++)
-            {
-                randomChar = (char)random.Next(65, 72);
-                while (randomCharsArray.Contains(randomChar))
-                {
-                    randomChar = (char)random.Next(65, 72);
-                }
-
-                randomCharsArray[i] = randomChar;
-            }
-
-            return randomCharsArray;
-        }
-
-        public static string RandomCharsToStringBuilder()
-        {
-            StringBuilder randomCharsString = new StringBuilder();
-            for (int i = 0; i < m_RandomCharsLetters.Length; i++)
-            {
-                randomCharsString.Append(m_RandomCharsLetters[i] + " ");
-            }
-            return randomCharsString.Remove(randomCharsString.Length - 1, 1).ToString();
-        }
-
-        public void CheckGuess(char[] i_randomCharsArray)
-        {
-            GuessInput();
-            string playerGuess = Player.PlayerGuess.Replace(" ", "");
-            Console.WriteLine(playerGuess);
+            this.guessInput();
+            string playerGuess = Player.PlayerGuess.Replace(" ", string.Empty);
             int[] counterArray = new int[3];  // [V counter, X counter, NoHitCounter]
             for (int i = 0; i < 4; i++)
             {
-                if (playerGuess.Contains(i_randomCharsArray[i]))
+                if (playerGuess.Contains(i_RandomCharsArray[i]))
                 {
-                    if (i_randomCharsArray[i] == playerGuess[i])
+                    if (i_RandomCharsArray[i] == playerGuess[i])
                     {
                         counterArray[0]++;
                     }
@@ -170,40 +140,40 @@ namespace A22_Ex02
             Player.PlayerHitsCounter = counterArray;
         }
 
-        public static void IsANumber(ref int io_NumberOfTries, bool io_IsANumber)
+        private void isANumber(ref int io_numberOfTries, bool i_isANumber)
         {
-            while (!io_IsANumber)
+            while (!i_isANumber)
             {
                 Console.WriteLine("\nWrong input, you should input a number only, Try again.\n");
-                io_IsANumber = int.TryParse(Console.ReadLine(), out io_NumberOfTries);
+                i_isANumber = int.TryParse(Console.ReadLine(), out io_numberOfTries);
             }
         }
 
-        public static bool WinOrLose(string i_Hit)
+        internal static bool WinOrLose(string i_Hit)
         {
             return i_Hit.Contains("V V V V");
         }
 
-        public static void IfGuessedCorrectly(bool i_IsGueesedCorrectly)
+        internal static void IfGuessedCorrectly(bool i_IsGueesedCorrectly)
         {
             char startGameOrNot = '0';
             bool isOnlyOneChar = false;
-            if (i_IsGueesedCorrectly == true)
+            if (i_IsGueesedCorrectly)
             {
                 Console.WriteLine("\nYou guessed correctly after " + Player.PlayerHitsList.Count() + " Steps!\n");
                 Console.WriteLine("Would you like to start a new game? (Y/N)");
                 isOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out startGameOrNot);
-                Bullseye.CheckIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
+                checkIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
                 while (!(startGameOrNot == 'Y' || startGameOrNot == 'N'))
                 {
-                    Console.WriteLine("\nWrong input, you should enter only Y or N characters.\n");
+                    Console.WriteLine("\nWrong input, you should enter only Y or N letter.\n");
                     isOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out startGameOrNot);
-                    Bullseye.CheckIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
+                    checkIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
                 }
 
                 if (startGameOrNot == 'N')
                 {
-                    Console.WriteLine("Thanks for playing have a nice day, see you soon.\n");
+                    Console.WriteLine("Thanks for playing, have a nice day.\n");
                     Environment.Exit(0);
                 }
                 else
@@ -215,26 +185,26 @@ namespace A22_Ex02
             }
         }
 
-        public static void IfNotGuessedCorrectly(bool i_IsGuessedCorrectly)
+        internal static void IfNotGuessedCorrectly(bool i_m_IsGuessedCorrectly)
         {
             char startGameOrNot = '0';
             bool isOnlyOneChar = false;
-            if (i_IsGuessedCorrectly == false)
+            if (i_m_IsGuessedCorrectly == false)
             {
                 Console.WriteLine("No more guesses allowed. You Lost.\n");
                 Console.WriteLine("Would you like to start a new game? (Y/N)");
                 isOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out startGameOrNot);
-                Bullseye.CheckIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
+                checkIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
                 while (!(startGameOrNot == 'Y' || startGameOrNot == 'N'))
                 {
-                    Console.WriteLine("Wrong input, you should enter only Y or N characters.\n");
+                    Console.WriteLine("Wrong input, you should enter only Y or N letter.\n");
                     isOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out startGameOrNot);
-                    Bullseye.CheckIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
+                    checkIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
                 }
 
                 if (startGameOrNot == 'N')
                 {
-                    Console.WriteLine("Thanks for playing have a nice day, see you soon.\n");
+                    Console.WriteLine("Thanks for playing, have a nice day.\n");
                     Environment.Exit(0);
                 }
                 else

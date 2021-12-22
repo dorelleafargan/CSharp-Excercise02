@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace A22_Ex02
 {
-    public class Program
+    internal class Program
     {
-        public static void Main()
+        internal static void Main()
         {
-
-            Bullseye Game = new Bullseye();
-            Game.Run();
+            Bullseye newGame = new Bullseye();
+            newGame.Run();
         }
     }
 }

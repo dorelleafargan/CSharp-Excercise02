@@ -1,2 +1,0 @@
-﻿To do list:
-1. Overhaul the code before handing the assignment.

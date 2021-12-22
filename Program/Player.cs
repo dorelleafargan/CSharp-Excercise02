@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace A22_Ex02
 {
-    public class Player
+    internal class Player
     {
         private static int m_NumberOfTries = 0;
         private static string m_PlayerGuess;
@@ -14,64 +14,61 @@ namespace A22_Ex02
         private static List<string> m_PlayerGuessStringList = new List<string>();
         private static List<string> m_PlayerHitsStringList = new List<string>();
   
-        public static int NumberOfTries 
+        internal static int NumberOfTries 
         {
             get { return m_NumberOfTries; }
             set { m_NumberOfTries = value; }
         }
 
-        public static string PlayerGuess
+        internal static string PlayerGuess
         {
             get { return m_PlayerGuess; }
             set { m_PlayerGuess = value; }
         }
 
-        public static int[] PlayerHitsCounter
+        internal static int[] PlayerHitsCounter
         {
             get { return m_RandomCharsHitsCounterArray; }
             set { m_RandomCharsHitsCounterArray = value; }
         }
 
-        public static List<string> PlayerGuessesList
+        internal static List<string> PlayerGuessesList
         {
             get { return m_PlayerGuessStringList; }
-            set { }
         }
 
-        public static List<string> PlayerHitsList
+        internal static List<string> PlayerHitsList
         {
             get { return m_PlayerHitsStringList; }
-            set { }
         }
 
         internal static void PlayerHitsSringBuilder()
         {
             StringBuilder hitString = new StringBuilder();
-            int[] playerHitsArray = PlayerHitsCounter;
-            for (int i = 0; i < playerHitsArray[0]; i++)
+            for (int i = 0; i < m_RandomCharsHitsCounterArray[0]; i++)
             {
                 hitString.Append("V ");
             }
 
-            for (int j = 0; j < playerHitsArray[1]; j++)
+            for (int j = 0; j < m_RandomCharsHitsCounterArray[1]; j++)
             {
                 hitString.Append("X ");
             }
 
-            for (int k = 0; k < playerHitsArray[2]; k++)
+            for (int k = 0; k < m_RandomCharsHitsCounterArray[2]; k++)
             {
                 hitString.Append("  ");
             }
 
-            PlayerHitsList.Add(hitString.Remove(hitString.Length - 1, 1).ToString());
+            m_PlayerHitsStringList.Add(hitString.Remove(hitString.Length - 1, 1).ToString());
         }
 
         internal static void PlayerGuessStringList()
         {
-            PlayerGuessesList.Add(PlayerGuess + " ");
+            m_PlayerGuessStringList.Add(PlayerGuess + " ");
         }
 
-        public static void PlayerListsReset()
+        internal static void PlayerListsReset()
         {
             m_PlayerHitsStringList.Clear();
             m_PlayerGuessStringList.Clear();

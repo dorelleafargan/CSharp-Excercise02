@@ -6,56 +6,69 @@ using System.Threading.Tasks;
 
 namespace A22_Ex02
 {
-    public class GameScreen
+    internal class GameScreen
     {
+        private static StringBuilder s_GameBoardBuilder = new StringBuilder(string.Empty);
+        private static List<string> s_PlayerGuesses = Player.PlayerGuessesList;
+        private static List<string> s_PlayerHits = Player.PlayerHitsList;
+        private static int s_GuessNumber = 0;
+        private static int s_NumberOfTries = 0;
+        private static bool s_IsGuessedCorrectly = false;
+
         internal static void DrawOnScreen()
         {
             Ex02.ConsoleUtils.Screen.Clear();
-            StringBuilder gameBoardBuilder = new StringBuilder(string.Empty);
-            List<string> playerGuesses = Player.PlayerGuessesList;
-            List<string> playerHits = Player.PlayerHitsList;
-            int guessNumber = Player.PlayerHitsList.Count;
-            int numberOfTries = Player.NumberOfTries;
-            bool isGuessedCorrectly = false;
             Console.WriteLine("Current Board Status:\n");
-            gameBoardBuilder.Append("|Pins:    |Result:|");
-            gameBoardBuilder.Append(Environment.NewLine);
-            gameBoardBuilder.Append("|=========|=======|");
-            gameBoardBuilder.Append(Environment.NewLine);
-            if (numberOfTries == guessNumber)
+            s_GameBoardBuilder.Append("|Pins:    |Result:|");
+            s_GameBoardBuilder.Append(Environment.NewLine);
+            s_GameBoardBuilder.Append("|=========|=======|");
+            s_GameBoardBuilder.Append(Environment.NewLine);
+            s_NumberOfTries = Player.NumberOfTries;
+            s_GuessNumber = Player.PlayerHitsList.Count;
+            if (s_NumberOfTries == s_GuessNumber)
             {
-                gameBoardBuilder.Append("| " + Bullseye.RandomCharsToStringBuilder() + " |       |");
+                s_GameBoardBuilder.Append("| " + RandomLettersGenerator.RandomCharsToStringBuilder() + " |       |");
             }
             else
             {
-                gameBoardBuilder.Append("| # # # # |       |");
-
-            }
-            gameBoardBuilder.Append(Environment.NewLine);
-            gameBoardBuilder.Append("|=========|=======|");
-
-            for (int i = 0; i < guessNumber; i++)
-            {
-                gameBoardBuilder.Append(Environment.NewLine);
-                gameBoardBuilder.Append("| " + Player.PlayerGuessesList[i] + "|" + Player.PlayerHitsList[i] + "|");
-                gameBoardBuilder.Append(Environment.NewLine);
-                gameBoardBuilder.Append("|=========|=======|");
-                isGuessedCorrectly = Bullseye.WinOrLose(Player.PlayerHitsList[i]);
+                s_GameBoardBuilder.Append("| # # # # |       |");
             }
 
-            for (int i = 0; i < numberOfTries - guessNumber; i++)
+            s_GameBoardBuilder.Append(Environment.NewLine);
+            s_GameBoardBuilder.Append("|=========|=======|");
+            printPlayerGuessesAndHits();
+            printEmptyFields();
+            s_GameBoardBuilder.Append(Environment.NewLine);
+            Console.WriteLine(s_GameBoardBuilder);
+            Bullseye.IfGuessedCorrectly(s_IsGuessedCorrectly);
+            if (s_GuessNumber == s_NumberOfTries)
             {
-                gameBoardBuilder.Append(Environment.NewLine);
-                gameBoardBuilder.Append("|         |       |");
-                gameBoardBuilder.Append(Environment.NewLine);
-                gameBoardBuilder.Append("|=========|=======|");
+                Bullseye.IfNotGuessedCorrectly(s_IsGuessedCorrectly);
             }
-            gameBoardBuilder.Append(Environment.NewLine);
-            Console.WriteLine(gameBoardBuilder);
-            Bullseye.IfGuessedCorrectly(isGuessedCorrectly);
-            if (guessNumber == numberOfTries)
+
+            s_GameBoardBuilder.Clear();
+        }
+
+        private static void printPlayerGuessesAndHits()
+        {
+            for (int i = 0; i < s_GuessNumber; i++)
             {
-                Bullseye.IfNotGuessedCorrectly(isGuessedCorrectly);
+                s_GameBoardBuilder.Append(Environment.NewLine);
+                s_GameBoardBuilder.Append("| " + Player.PlayerGuessesList[i] + "|" + Player.PlayerHitsList[i] + "|");
+                s_GameBoardBuilder.Append(Environment.NewLine);
+                s_GameBoardBuilder.Append("|=========|=======|");
+                s_IsGuessedCorrectly = Bullseye.WinOrLose(Player.PlayerHitsList[i]);
+            }
+        }
+
+        private static void printEmptyFields()
+        {
+            for (int i = 0; i < s_NumberOfTries - s_GuessNumber; i++)
+            {
+                s_GameBoardBuilder.Append(Environment.NewLine);
+                s_GameBoardBuilder.Append("|         |       |");
+                s_GameBoardBuilder.Append(Environment.NewLine);
+                s_GameBoardBuilder.Append("|=========|=======|");
             }
         }
     }
