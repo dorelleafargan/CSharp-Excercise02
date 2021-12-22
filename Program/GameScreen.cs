@@ -18,6 +18,7 @@ namespace A22_Ex02
         internal static void DrawOnScreen()
         {
             Ex02.ConsoleUtils.Screen.Clear();
+            s_GameBoardBuilder.Clear();
             Console.WriteLine("Current Board Status:\n");
             s_GameBoardBuilder.Append("|Pins:    |Result:|");
             s_GameBoardBuilder.Append(Environment.NewLine);
@@ -45,8 +46,6 @@ namespace A22_Ex02
             {
                 Bullseye.IfNotGuessedCorrectly(s_IsGuessedCorrectly);
             }
-
-            s_GameBoardBuilder.Clear();
         }
 
         private static void printPlayerGuessesAndHits()

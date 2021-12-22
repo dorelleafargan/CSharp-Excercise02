@@ -1,12 +1,3 @@
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\bin\Debug\Program.exe.config
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\bin\Debug\Program.exe
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\bin\Debug\Program.pdb
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\bin\Debug\Ex02.ConsoleUtils.dll
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\obj\Debug\A22_Ex02.csproj.AssemblyReference.cache
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\obj\Debug\A22_Ex02.csproj.CoreCompileInputs.cache
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\obj\Debug\A22_Ex02.csproj.CopyComplete
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\obj\Debug\Program.exe
-C:\Users\lior.elayev\Desktop\Computer Science\.NET-C#\מטלה 2 - C#\CSharp-Excercise02\Program\obj\Debug\Program.pdb
 C:\C#\Ex02\Program\bin\Debug\Program.exe.config
 C:\C#\Ex02\Program\bin\Debug\Program.exe
 C:\C#\Ex02\Program\bin\Debug\Program.pdb

@@ -169,6 +169,7 @@ namespace A22_Ex02
                     Console.WriteLine("\nWrong input, you should enter only Y or N letter.\n");
                     isOnlyOneChar = char.TryParse(Console.ReadLine().ToUpper(), out startGameOrNot);
                     checkIfStringOrChar(isOnlyOneChar, ref startGameOrNot);
+
                 }
 
                 if (startGameOrNot == 'N')
